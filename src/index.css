@@ -1,0 +1,15 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  /* font-size: 1.3rem; */
+  font-family: Montserrat, sans-serif;
+}
+
+img {
+  max-width: 100%;
+}
