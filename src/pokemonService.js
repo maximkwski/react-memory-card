@@ -6,8 +6,8 @@ export const fetchPokemon = async (id) => {
     try {
         const response = await axios.get(`${BASE_URL}/${id}`);
         return {
-            id: response.data.id;
-            name: response.data.name;
+            id: response.data.id,
+            name: response.data.name,
             image: response.data.sprites.front_default
         };
     } catch (error) {

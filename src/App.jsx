@@ -30,6 +30,7 @@ function App() {
       setGameOver(true);
     } else {
       setClickedCards([...clickedCards, id]);
+      
       setScore(score + 1);
       setCards(shuffledCards);
     }
