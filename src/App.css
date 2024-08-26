@@ -1,8 +1,45 @@
-.card-grid {
+.container {
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #352f44;
+    padding: 1em 0;
+    font-family: Oswald;
+    color: #dbd8e3;
+}
+
+.scoreboard {
+    padding: 1em 0;
+    color: #2a2438;
+}
+
+
+
+button {
+    background-color: #5c5470;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+.card-grid .container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     margin: 0 auto;
+}
+
+.card-grid {
+    margin-bottom: 2em;
 }
 
 .card {
@@ -20,7 +57,18 @@
 }
 
 
-.scoreboard {
-    /* text-align: center; */
-    margin-bottom: 20px;
+.scoreboard .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.message .container {
+    border-radius: 8px;
+    text-align: center;
+    padding: 2em 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.message h2 {
+    margin-bottom: 0.5em;
 }

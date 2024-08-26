@@ -17,7 +17,7 @@ function App() {
   const storedScore = localStorage.getItem('score');
   const storedBestScore = localStorage.getItem('bestScore');
   const storedClickedCards = localStorage.getItem('clickedCards');
-  
+
   useEffect(() => {
     if (storedScore) setScore(JSON.parse(storedScore));
     if (storedBestScore) setBestScore(JSON.parse(storedBestScore));
@@ -34,7 +34,6 @@ function App() {
 
 // Save the current game state to localStorage whenever it changes
   useEffect(() => {
-    console.log('Saving to localStorage:', { score, bestScore, clickedCards });
     localStorage.setItem('score', JSON.stringify(score));
     localStorage.setItem('bestScore', JSON.stringify(bestScore));
     localStorage.setItem('clickedCards', JSON.stringify(clickedCards));
@@ -65,14 +64,18 @@ function App() {
   return (
     <div className="app">
       <header>
-        <h1>Pokemon Memory Game</h1>
-        <h2>The goal is to click on each image only once to earn a point.</h2>
+        <div className='container row'>
+          <h1>Pokemon Memory Game</h1>
+          <h3>The goal is to click on each image only once to earn a point.</h3>
+        </div>
       </header>
       <Scoreboard score={score} bestScore={bestScore}/>
       {gameOver ? (
-        <div>
-          <h2>Game Over!</h2>
-          <button onClick={resetGame}>Play Again</button>
+        <div className='message'>
+          <div className="container row">
+            <h2>Game Over!</h2>
+            <button onClick={resetGame}>Play Again</button>
+          </div>
         </div>
       ) : (
         <CardGrid cards={shuffledCards} onCardClick={handleCardClick} />
