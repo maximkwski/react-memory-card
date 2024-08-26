@@ -10,10 +10,19 @@ function App() {
   const initialCards = [];
   const [cards, setCards] = useState(initialCards);
   const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [gameOver, setGameOver] = useState(false);
 
+  const storedScore = localStorage.getItem('score');
+  const storedBestScore = localStorage.getItem('bestScore');
+  const storedClickedCards = localStorage.getItem('clickedCards');
+  
   useEffect(() => {
+    if (storedScore) setScore(JSON.parse(storedScore));
+    if (storedBestScore) setBestScore(JSON.parse(storedBestScore));
+    if (storedClickedCards) setClickedCards(JSON.parse(storedClickedCards));
+
     const loadPokemonData = async () => {
       const pokemonData = await fetchMultiplePokemon(12);
       setCards(pokemonData);
@@ -23,10 +32,21 @@ function App() {
 
   }, []);
 
+// Save the current game state to localStorage whenever it changes
+  useEffect(() => {
+    console.log('Saving to localStorage:', { score, bestScore, clickedCards });
+    localStorage.setItem('score', JSON.stringify(score));
+    localStorage.setItem('bestScore', JSON.stringify(bestScore));
+    localStorage.setItem('clickedCards', JSON.stringify(clickedCards));
+  }, [score, bestScore, clickedCards]);
+
   const shuffledCards = useShuffle(cards);
 
   const handleCardClick = (id) => {
     if(clickedCards.includes(id)) {
+      if( score > bestScore ) {
+        setBestScore(score);
+      }
       setGameOver(true);
     } else {
       setClickedCards([...clickedCards, id]);
@@ -48,7 +68,7 @@ function App() {
         <h1>Pokemon Memory Game</h1>
         <h2>The goal is to click on each image only once to earn a point.</h2>
       </header>
-      <Scoreboard score={score} />
+      <Scoreboard score={score} bestScore={bestScore}/>
       {gameOver ? (
         <div>
           <h2>Game Over!</h2>
