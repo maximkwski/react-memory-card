@@ -14,30 +14,21 @@ function App() {
   const [clickedCards, setClickedCards] = useState([]);
   const [gameOver, setGameOver] = useState(false);
 
-  const storedScore = localStorage.getItem('score');
-  const storedBestScore = localStorage.getItem('bestScore');
-  const storedClickedCards = localStorage.getItem('clickedCards');
+  console.log('cards: '+ cards.length)
+  console.log('clicked cards: ' + clickedCards.length)
+  // const storedScore = localStorage.getItem('score');
+  // const storedBestScore = localStorage.getItem('bestScore');
+  // const storedClickedCards = localStorage.getItem('clickedCards');
 
   useEffect(() => {
-    if (storedScore) setScore(JSON.parse(storedScore));
-    if (storedBestScore) setBestScore(JSON.parse(storedBestScore));
-    if (storedClickedCards) setClickedCards(JSON.parse(storedClickedCards));
-
     const loadPokemonData = async () => {
-      const pokemonData = await fetchMultiplePokemon(18);
+      const pokemonData = await fetchMultiplePokemon(4);
       setCards(pokemonData);
     };
 
     loadPokemonData();
 
   }, []);
-
-// Save the current game state to localStorage whenever it changes
-  useEffect(() => {
-    localStorage.setItem('score', JSON.stringify(score));
-    localStorage.setItem('bestScore', JSON.stringify(bestScore));
-    localStorage.setItem('clickedCards', JSON.stringify(clickedCards));
-  }, [score, bestScore, clickedCards]);
 
   const shuffledCards = useShuffle(cards);
 
@@ -49,9 +40,13 @@ function App() {
       setGameOver(true);
     } else {
       setClickedCards([...clickedCards, id]);
-      
       setScore(score + 1);
-      setCards(shuffledCards);
+      if (clickedCards.length + 1  === cards.length) {
+        setBestScore(score + 1);
+        setGameOver(true);
+      } else {
+        setCards(shuffledCards);
+      }
     }
   }
 
@@ -70,10 +65,14 @@ function App() {
         </div>
       </header>
       <Scoreboard score={score} bestScore={bestScore}/>
-      {gameOver ? (
+      {gameOver ?  (
         <div className='message container row'>
           <div className="message__content">
-            <h2>Game Over!</h2>
+            {score === cards.length ? (
+                <h2>Congrats! You won!</h2>
+            ) : (
+                <h2>Game Over!</h2>
+            )}
             <button onClick={resetGame}>Play Again</button>
           </div>
         </div>
