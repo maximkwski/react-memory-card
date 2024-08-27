@@ -62,11 +62,13 @@ button:hover {
     justify-content: space-between;
 }
 
-.message .container {
+.message__content {
+    margin: 0 auto;
     border-radius: 8px;
     text-align: center;
     padding: 2em 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
 }
 
 .message h2 {

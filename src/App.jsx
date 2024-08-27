@@ -24,7 +24,7 @@ function App() {
     if (storedClickedCards) setClickedCards(JSON.parse(storedClickedCards));
 
     const loadPokemonData = async () => {
-      const pokemonData = await fetchMultiplePokemon(12);
+      const pokemonData = await fetchMultiplePokemon(18);
       setCards(pokemonData);
     };
 
@@ -71,8 +71,8 @@ function App() {
       </header>
       <Scoreboard score={score} bestScore={bestScore}/>
       {gameOver ? (
-        <div className='message'>
-          <div className="container row">
+        <div className='message container row'>
+          <div className="message__content">
             <h2>Game Over!</h2>
             <button onClick={resetGame}>Play Again</button>
           </div>

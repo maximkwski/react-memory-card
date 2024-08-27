@@ -19,8 +19,16 @@ export const fetchPokemon = async (id) => {
 
 export const fetchMultiplePokemon = async (count) => {
     const promises = [];
-    for (let i = 1; i <= count; i++) {
-        promises.push(fetchPokemon(i));
+    const usedIDs = new Set();
+    const maxPokemonId = 898;
+
+    while (usedIDs.size < count) {
+        const randomId = Math.floor(Math.random() * maxPokemonId) + 1;
+        if(!usedIDs.has(randomId)) {
+            usedIDs.add(randomId);
+            promises.push(fetchPokemon(randomId));
+        }
+
     }
     return Promise.all(promises);
 };
