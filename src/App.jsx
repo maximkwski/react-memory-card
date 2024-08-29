@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Scoreboard from './components/Scoreboard';
 import CardGrid from './components/CardGrid';
+import Footer from './components/Footer';
 import useShuffle from './hooks/useShuffle';
 import { fetchMultiplePokemon } from './pokemonService';
 
@@ -13,12 +14,6 @@ function App() {
   const [bestScore, setBestScore] = useState(0);
   const [clickedCards, setClickedCards] = useState([]);
   const [gameOver, setGameOver] = useState(false);
-
-  console.log('cards: '+ cards.length)
-  console.log('clicked cards: ' + clickedCards.length)
-  // const storedScore = localStorage.getItem('score');
-  // const storedBestScore = localStorage.getItem('bestScore');
-  // const storedClickedCards = localStorage.getItem('clickedCards');
 
   useEffect(() => {
     const loadPokemonData = async () => {
@@ -79,6 +74,7 @@ function App() {
       ) : (
         <CardGrid cards={shuffledCards} onCardClick={handleCardClick} />
       )}
+      <Footer />
     </div>
   )
 }
