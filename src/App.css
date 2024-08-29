@@ -33,7 +33,7 @@ button:hover {
 
 .card-grid .container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 10px;
     margin: 0 auto;
 }
@@ -73,4 +73,16 @@ button:hover {
 
 .message h2 {
     margin-bottom: 0.5em;
+}
+
+@media screen and (min-width: 950px) {
+    .container {
+        width: 60%;
+    }
+
+    .card-grid .container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+
 }

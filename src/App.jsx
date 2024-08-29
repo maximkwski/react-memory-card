@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     const loadPokemonData = async () => {
-      const pokemonData = await fetchMultiplePokemon(4);
+      const pokemonData = await fetchMultiplePokemon(12);
       setCards(pokemonData);
     };
 
