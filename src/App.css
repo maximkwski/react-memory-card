@@ -69,6 +69,10 @@ button:hover {
     justify-content: space-between;
 }
 
+.message {
+    flex: 1;
+}
+
 .message__content {
     margin: 0 auto;
     border-radius: 8px;
